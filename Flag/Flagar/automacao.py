@@ -284,13 +284,19 @@ def etapa_selecionar_programa(programa_cfg, nome_programa):
             if TEMPO_DROPDOWN > 0:
                 time.sleep(TEMPO_DROPDOWN)
 
-            pyautogui.press("down", presses=programa_cfg["setas"], interval=TEMPO_SETA)
+            # Aqui ocorre a substituição das setas pela colagem do texto
+            texto_para_digitar = programa_cfg.get("texto_pesquisa", nome_programa)
+            colar_texto(texto_para_digitar)
+            
+            # Uma pequena pausa para dar tempo de a interface do sistema filtrar a lista
+            time.sleep(0.3) 
+
             pyautogui.press("enter")
 
             if TEMPO_SELECIONAR_PROGRAMA > 0:
                 time.sleep(TEMPO_SELECIONAR_PROGRAMA)
 
-            print(f"[OK] Programa selecionado: {nome_programa}")
+            print(f"[OK] Programa selecionado via texto: {texto_para_digitar}")
             return True
 
         print("[INFO] Adicionar não encontrado nesta tentativa")
