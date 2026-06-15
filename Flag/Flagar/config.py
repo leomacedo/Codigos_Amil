@@ -50,34 +50,33 @@ IMG_MENSAGEM_ENTER = os.path.join(BASE_DIR, "img", "mensagem.png")  # Mensagem q
 # =========================================================
 
 PROGRAMAS = {
-    "anticoagulante seguro": {"texto_pesquisa": "CuidadosMil - Anticoagulante Seguro"},  
-    "cuidado cardiaco valvar": {"texto_pesquisa": "CuidadosMil - Cuidado Cardíaco Valvar"},  
-    "cuidado integral da mama": {"texto_pesquisa": "CuidadosMil - Cuidado Integral da Mama"},  
-    "cuidado oncologico colorretal": {"texto_pesquisa": "CuidadosMil - Cuidado Oncológico Colorretal"},  
-    "cuidado oncologico prostata": {"texto_pesquisa": "CuidadosMil - Cuidado Oncológico Próstata"},  
-    "cuidado oncologico pulmonar": {"texto_pesquisa": "CuidadosMil - Cuidado Oncológico Pulmonar"},  
-    "cuidados para endometriose": {"texto_pesquisa": "CuidadosMil - Endometriose"},  
-    "cuidados pos infarto": {"texto_pesquisa": "CuidadosMil - Cuidados Pós Infarto"},
-    "emagrecimento": {"texto_pesquisa": "CuidadosMil - Emagrecimento"},
-    "fumo zero": {"texto_pesquisa": "CuidadosMil - Fumo Zero"},  
-    "gestacao segura": {"texto_pesquisa": "CuidadosMil - Gestação Segura"},
-    "insuficiencia cardiaca controlada": {"texto_pesquisa": "CuidadosMil - Insuficiência Cardíaca Controlada"},
-    "pos avc": {"texto_pesquisa": "CuidadosMil - Cuidados Pós-AVC"},  
-    "ritmo certo": {"texto_pesquisa": "CuidadosMil - Ritmo Certo"},
-    "saude da coluna": {"texto_pesquisa": "CuidadosMil - Saúde da Coluna"},
-    "saude mental": {"texto_pesquisa": "CuidadosMil - Saúde Mental"},
-    "saude renal": {"texto_pesquisa": "CuidadosMil - Saúde Renal"},
-    
-    # Mantidos do seu código original por segurança
-    "alta dependencia - bem cuidado - dom pedro": {"texto_pesquisa": "Alta Dependência - Bem Cuidado - Dom Pedro"},
-    "melhores cuidados - dom pedro": {"texto_pesquisa": "Melhores Cuidados - Dom Pedro"},
-    "melhores cuidados - dot": {"texto_pesquisa": "Melhores Cuidados - Dot"},
-    "melhores cuidados - lacos": {"texto_pesquisa": "Melhores Cuidados - Laços"},
-    "melhores cuidados - valsa": {"texto_pesquisa": "Melhores Cuidados - Valsa"},
-    "melhores cuidados - vivaz": {"texto_pesquisa": "Melhores Cuidados - Vivaz"},
-    "vitalidade": {"texto_pesquisa": "Vitalidade"},
-    "viva bem - dom pedro": {"texto_pesquisa": "Viva Bem - Dom Pedro"},
-    "viva bem - dot": {"texto_pesquisa": "Viva Bem - Dot"}
+    "anticoagulante seguro": {"setas": 15},  
+    "cuidado cardiaco valvar": {"setas": 18},  
+    "cuidado integral da mama": {"setas": 19},  
+    "cuidado oncologico colorretal": {"setas": 21},  
+    "cuidado oncologico prostata": {"setas": 20},  
+    "cuidado oncologico pulmonar": {"setas": 22},  
+    "cuidados para endometriose": {"setas": 29},  
+    "cuidados pos infarto": {"setas": 23},
+    "emagrecimento": {"setas": 12},
+    "fumo zero": {"setas": 34},  
+    "gestacao segura": {"setas": 30},
+    "insuficiencia cardiaca controlada": {"setas": 13},
+    "pos avc": {"setas": 26},  
+    "ritmo certo": {"setas": 31},
+    "saude da coluna": {"setas": 32},
+    "saude mental": {"setas": 14},
+    "saude renal": {"setas": 33},
+    "alta dependencia - bem cuidado - dom pedro": {"setas": 2},
+    "melhores cuidados - dom pedro": {"setas": 44},
+    "melhores cuidados - dot": {"setas": 45},
+    "melhores cuidados - lacos": {"setas": 46},
+    "melhores cuidados - valsa": {"setas": 47},
+    "melhores cuidados - vivaz": {"setas": 48},
+    "vitalidade": {"setas": 62},
+    "viva bem - dom pedro": {"setas": 64},
+    "viva bem - dot": {"setas": 65}
+  
 }
 
 # =========================================================
