@@ -27,6 +27,17 @@ alteracoes_pendentes = 0
 # FUNÇÕES UTILITÁRIAS
 # =========================================================
 
+def verificar_excluido_apos_carga():
+    print("[INFO] Verificando se MO está excluída após carregar tela...")
+
+    pos = esperar_imagem(IMG_EXCLUIDO, TEMPO_BUSCA_EXCLUIDO_APOS_CARGA, CONF_EXCLUIDO)
+
+    if pos:
+        print("[INFO] Imagem de excluído encontrada após carregar tela")
+        return True
+
+    return False
+
 def clicar_com_offset(img, offset_x=0, offset_y=0, delay=0.5, conf=None):
     pos = esperar_imagem(img, 5, conf)
 
@@ -255,6 +266,10 @@ def esperar_tela_ou_mensagem_enter():
     inicio = time.time()
 
     while time.time() - inicio < TEMPO_CARREGAR_OU_MENSAGEM:
+        if encontrar_imagem(IMG_EXCLUIDO, CONF_EXCLUIDO):
+            print("[INFO] Imagem de excluído detectada após ENTER")
+            return "excluido"
+
         if encontrar_imagem(IMG_MENSAGEM_ENTER, CONF_MENSAGEM_ENTER):
             print("[INFO] Mensagem após ENTER detectada")
             return "mensagem_enter"
@@ -265,7 +280,7 @@ def esperar_tela_ou_mensagem_enter():
 
         time.sleep(0.1)
 
-    print("[ERRO] Tela não carregou e nenhuma mensagem apareceu")
+    print("[ERRO] Tela não carregou, nenhuma mensagem e nenhum excluído apareceu")
     return "timeout"
 
 # =========================================================
@@ -306,17 +321,6 @@ def etapa_selecionar_programa(programa_cfg, nome_programa):
 # =========================================================
 
 def etapa_data_inicio():
-    pos = esperar_imagem(IMG_ADICIONAR_DEPOIS, 5, CONF_ADICIONAR_DEPOIS)
-
-    if not pos:
-        print("[ERRO] Não encontrou adicionar depois para localizar data início")
-        return False
-
-    x = pos[0] + OFFSET_DATA_INICIO_X
-    y = pos[1] + OFFSET_DATA_INICIO_Y
-
-    pyautogui.click(x, y)
-
     if TEMPO_DATA_INICIO > 0:
         time.sleep(TEMPO_DATA_INICIO)
 
@@ -440,6 +444,10 @@ def fluxo():
 
     resultado_carregamento = esperar_tela_ou_mensagem_enter()
 
+    # =====================================================
+    # CASO MENSAGEM APÓS ENTER
+    # =====================================================
+
     if resultado_carregamento == "mensagem_enter":
         print("[INFO] MO com mensagem após ENTER - limpando e seguindo")
 
@@ -452,6 +460,10 @@ def fluxo():
         mostrar_progresso()
         return
 
+    # =====================================================
+    # CASO TIMEOUT AO CARREGAR
+    # =====================================================
+
     if resultado_carregamento == "timeout":
         print("[ERRO] Tela não carregou")
         print("[RETRY] Mesma MO será repetida")
@@ -463,12 +475,50 @@ def fluxo():
         registrar_falha("tela não carregou")
         return
 
+    # =====================================================
+    # CASO TELA CARREGADA
+    # =====================================================
+
     if TEMPO_ESTABILIZACAO > 0:
         time.sleep(TEMPO_ESTABILIZACAO)
 
+    # =====================================================
+    # VERIFICA EXCLUÍDO DEPOIS QUE A TELA CARREGOU
+    # =====================================================
+
+    if verificar_excluido_apos_carga():
+        print("[INFO] MO está excluída após carregar tela - limpando e seguindo")
+
+        if not limpar_e_confirmar():
+            registrar_falha("excluído após carregar e falha ao limpar")
+            return
+
+        confirmar_item_processado("já excluído", "Excluído")
+        resetar_falhas()
+        mostrar_progresso()
+        return
+
     print("[INFO] Tentando flagar programa...")
 
+    # =====================================================
+    # TENTA SELECIONAR PROGRAMA
+    # =====================================================
+
     if not etapa_selecionar_programa(programa_cfg, nome_programa):
+        print("[INFO] Não encontrou adicionar - verificando se está excluído")
+
+        if verificar_excluido_apos_carga():
+            print("[INFO] Não tinha adicionar porque MO está excluída - limpando e seguindo")
+
+            if not limpar_e_confirmar():
+                registrar_falha("excluído sem adicionar e falha ao limpar")
+                return
+
+            confirmar_item_processado("já excluído", "Excluído")
+            resetar_falhas()
+            mostrar_progresso()
+            return
+
         print("[INFO] Não encontrou adicionar - limpando e seguindo")
 
         if not limpar_e_confirmar():
@@ -480,6 +530,10 @@ def fluxo():
         mostrar_progresso()
         return
 
+    # =====================================================
+    # COLA DATA DIRETO APÓS SELECIONAR PROGRAMA
+    # =====================================================
+
     if not etapa_data_inicio():
         print("[ERRO] Falha ao colar data início - limpando antes de tentar novamente")
 
@@ -489,6 +543,10 @@ def fluxo():
 
         registrar_falha("falha ao colar data início")
         return
+
+    # =====================================================
+    # FINALIZA
+    # =====================================================
 
     if not etapa_finalizar():
         print("[ERRO] Falha ao finalizar - limpando antes de tentar novamente")
@@ -502,11 +560,19 @@ def fluxo():
 
     resultado = esperar_resultado_finalizacao()
 
+    # =====================================================
+    # CASO SUCESSO
+    # =====================================================
+
     if resultado == "sucesso":
         confirmar_item_processado("flagado", "Ativo")
         resetar_falhas()
         mostrar_progresso()
         return
+
+    # =====================================================
+    # CASO PROGRAMA JÁ ATIVO
+    # =====================================================
 
     if resultado == "ja_existe":
         print("[INFO] Limpando tela após erro de programa ativo")
@@ -520,6 +586,10 @@ def fluxo():
         mostrar_progresso()
         return
 
+    # =====================================================
+    # CASO SEM RESULTADO
+    # =====================================================
+
     print("[ERRO] Sem sucesso e sem erro ativo - limpando antes de tentar novamente")
 
     if not limpar_e_confirmar():
@@ -528,7 +598,6 @@ def fluxo():
 
     registrar_falha("sem sucesso e sem erro ativo")
     return
-
 # =========================================================
 # LOOP AUTOMÁTICO
 # =========================================================

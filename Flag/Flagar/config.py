@@ -19,7 +19,7 @@ PLANILHA_SAIDA = os.path.join(BASE_DIR, "resultado_flag.xlsx")  # Planilha gerad
 # CONFIGURAÇÕES GERAIS
 # =========================================================
 
-DATA = datetime.now().strftime("%d/%m/%Y") # Data que será colada no campo Data fim
+DATA = datetime.now().strftime("%d/%m/%Y") 
     
 CONF_GERAL = 0.98  # Confiança para imagens fixas
 CONF_ADICIONAR = 0.92  # Confiança para botão adicionar
@@ -27,8 +27,9 @@ CONF_ADICIONAR_DEPOIS = 0.92  # Confiança para botão adicionar depois
 CONF_SUCESSO = 0.97  # Confiança para confirmação de sucesso
 CONF_ERRO_ATIVO = 0.95  # Confiança para mensagem de programa já ativo
 CONF_MENSAGEM_ENTER = 0.95  # Confiança da mensagem após ENTER
+CONF_EXCLUIDO = 0.92
 
-DEBUG = True  # True mostra logs de precisão no terminal
+DEBUG = False  # True mostra logs de precisão no terminal
 
 REGION = (0, 0, 1920, 1080)  # Região da tela onde o bot procura imagens
 
@@ -44,6 +45,7 @@ IMG_SUCESSO = os.path.join(BASE_DIR, "img", "sucesso.png")  # Confirmação de s
 IMG_LIMPAR = os.path.join(BASE_DIR, "img", "limpar.png")  # Botão limpar
 IMG_ERRO_ATIVO = os.path.join(BASE_DIR, "img", "erro.png")  # Mensagem: Já possui programa ativo
 IMG_MENSAGEM_ENTER = os.path.join(BASE_DIR, "img", "mensagem.png")  # Mensagem que aparece após ENTER
+IMG_EXCLUIDO = os.path.join(BASE_DIR, "img", "excluido.png")
 
 # =========================================================
 # PROGRAMAS (ATUALIZADO PARA PESQUISA POR TEXTO)
@@ -89,40 +91,41 @@ OFFSET_DATA_INICIO_Y = -65  # Altura do adicionar até o campo data início
 
 
 # =========================================================
-# TEMPOS - SUPER RÁPIDO SEGURO
+# TEMPOS - SUPER RÁPIDO
 # =========================================================
 
+TEMPO_BUSCA_EXCLUIDO_APOS_CARGA = 0.35  # Procura excluído após carregar tela
 TEMPO_TESTE_DATA_FIM = 0.05
 
-TEMPO_MO = 0.05
+TEMPO_MO = 0.04
 TEMPO_ENTER = 0
-TEMPO_ESTABILIZACAO = 0.15
+TEMPO_ESTABILIZACAO = 0.08
 
-TEMPO_DROPDOWN = 0.08
+TEMPO_DROPDOWN = 0.05
 TEMPO_SETA = 0
-TEMPO_SELECIONAR_PROGRAMA = 0.08
+TEMPO_SELECIONAR_PROGRAMA = 0.05
 
-TEMPO_DATA_INICIO = 0.08
+TEMPO_DATA_INICIO = 0.05
 TEMPO_FINALIZAR = 0
 
-TEMPO_BUSCA_PROGRAMA_EXISTENTE = 0.2
-TEMPO_BUSCA_ADICIONAR = 1.2
+TEMPO_BUSCA_PROGRAMA_EXISTENTE = 0.15
+TEMPO_BUSCA_ADICIONAR = 0.7
 
 TENTATIVAS_ADICIONAR = 2
-TEMPO_RETRY_ADICIONAR = 0.5
-
+TEMPO_RETRY_ADICIONAR = 0.15
 
 TEMPO_LIMPAR = 0
-TEMPO_CONFIRMA_LIMPAR = 5
+TEMPO_CONFIRMA_LIMPAR = 4
 
-TEMPO_RESULTADO_FINALIZACAO = 2.5
-TEMPO_CARREGAR_OU_MENSAGEM = 8
+TEMPO_RESULTADO_FINALIZACAO = 2
+TEMPO_CARREGAR_OU_MENSAGEM = 6
 
-INTERVALO_CHECAGEM_RESULTADO = 0.03  # Intervalo entre buscas de sucesso/erro
-TEMPO_ENTRE_MOS = 0  # Sem pausa entre uma MO e outra
-SALVAR_A_CADA = 10  # Salva planilha a cada 10 MOs
+INTERVALO_CHECAGEM_RESULTADO = 0.03
+TEMPO_ENTRE_MOS = 0
+SALVAR_A_CADA = 10
 
-MAX_FALHAS = 3  # Máximo de falhas permitidas na mesma MO
+MAX_FALHAS = 3
+
 
 # =========================================================
 # CARREGAR PLANILHA

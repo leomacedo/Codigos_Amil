@@ -13,17 +13,11 @@ Ressaltamos que todos os contatos realizados pela equipe de enfermagem do Centro
 
 # Cole seus números aqui entre as três aspas, um por linha:
 NUMEROS_CRUS = """
-418257387
-417859138
-417835972
-417546690
-417325758
-417265620
-416497676
-416221903
-416408982
-416541024
-415865083
+096737478
+094418641
+092857092
+097420124
+079649693
 """
 
 # Converte o bloco de texto acima em uma lista, removendo espaços e linhas vazias.
