@@ -111,7 +111,7 @@ def processar_sm_ocupacional(caminho_arquivo):
         df_call_center = pd.DataFrame(index=df.index)
 
         df_call_center['FONTE'] = "Saúde Ocupacional"
-        df_call_center['CAMINHO'] = "Saúde Ocupacional"
+        df_call_center['CAMINHO'] = "Call Center"
         df_call_center['DATA INSERÇÃO'] = data_hoje
         df_call_center['LINHA DE CUIDADO'] = "Saúde Mental Ocupacional"
         df_call_center['Nome'] = df[col_nome].values

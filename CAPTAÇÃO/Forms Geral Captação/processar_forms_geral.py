@@ -144,7 +144,7 @@ def processar_forms_eric(caminho_arquivo):
         df['__PROGRAMA__'] = df['__PROGRAMA__'].apply(normalizar_programa)
 
         # --- ATUALIZAÇÃO DO STATUS NO ARQUIVO DE ORIGEM ---
-        col_status = 'STATUS'
+        col_status = 'STATUS DO LEO MACEDO'
         if col_status not in df.columns:
             df[col_status] = pd.NA
         
@@ -259,6 +259,7 @@ def processar_forms_eric(caminho_arquivo):
         df_captacao_dp_linhas = df[mask_captacao_dp_cond & mask_status_vazio & ~mask_remover].copy()
         
         print(f"Total de linhas na planilha: {len(df)}")
+        print(f"Linhas com STATUS vazio: {mask_status_vazio.sum()}")  # conta quantas linhas estão sem status
         print(f"  -> Irão para 'captação': {len(df_vazios)}")
         print(f"  -> Irão para 'navegação': {len(df_com_data)}")
         print(f"  -> Irão para 'Saúde Mental': {len(df_saude_mental_linhas)}")
@@ -481,8 +482,8 @@ if __name__ == "__main__":
     else:
         diretorio_script = os.path.dirname(os.path.abspath(__file__))
         
-    caminho_xlsx = os.path.join(diretorio_script, "Forms_Cru.xlsx")
-    caminho_csv = os.path.join(diretorio_script, "Forms_Cru.csv")
+    caminho_xlsx = os.path.join(diretorio_script, "Forms unificado captação CuidadosMil.xlsx")
+    caminho_csv = os.path.join(diretorio_script, "Forms unificado captação CuidadosMil.csv")
     
     if os.path.exists(caminho_xlsx):
         processar_forms_eric(caminho_xlsx)
@@ -490,5 +491,6 @@ if __name__ == "__main__":
         processar_forms_eric(caminho_csv)
     else:
         print(f"ERRO: Arquivo 'Forms_Cru.xlsx' ou 'Forms_Cru.csv' não encontrado na pasta: {diretorio_script}")
-        
+    
+    #finalizar
     input("\nPressione Enter para fechar a tela...")

@@ -1,4 +1,4 @@
-('C:\\Users\\le37118890\\OneDrive - Grupo Amil\\Codigos_leleo\\CAPTAÇÃO\\Forms '
+('C:\\Users\\le37118890\\Desktop\\codigos_amil\\Codigos_Amil\\CAPTAÇÃO\\Forms '
  'Geral Captação\\build\\processar_forms_geral\\PYZ-00.pyz',
  [('PIL',
    'C:\\Users\\le37118890\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\site-packages\\PIL\\__init__.py',
@@ -2768,6 +2768,9 @@
    'PYMODULE'),
   ('typing',
    'C:\\Users\\le37118890\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\typing.py',
+   'PYMODULE'),
+  ('typing_extensions',
+   'C:\\Users\\le37118890\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\site-packages\\typing_extensions.py',
    'PYMODULE'),
   ('tzdata',
    'C:\\Users\\le37118890\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\site-packages\\tzdata\\__init__.py',

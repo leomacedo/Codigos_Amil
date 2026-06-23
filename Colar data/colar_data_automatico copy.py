@@ -6,18 +6,15 @@ import threading
 
 # --- CONFIGURAÇÃO ---
 DATA_DESEJADA = "16/06/2026 14:00"
-TEXTO_ESPACO = "leonardo"
+TEXTO_ESPACO = "Sim"
 
 TEXTO_T = """Verificamos o caso e esclarecemos que o pedido mencionado refere-se a uma captação para a linha de cuidados Amil.
 Ressaltamos que todos os contatos realizados pela equipe de enfermagem do Centro Médico Dom Pedro geram um token, com o objetivo de validar a comunicação e a identificação do prestador, não implicando qualquer custo para o beneficiário."""
 
 # Cole seus números aqui entre as três aspas, um por linha:
 NUMEROS_CRUS = """
-096737478
-094418641
-092857092
-097420124
-079649693
+086402581
+087952429
 """
 
 # Converte o bloco de texto acima em uma lista, removendo espaços e linhas vazias.
@@ -144,7 +141,7 @@ def alternar_pause():
 
 
 def triplo_clique():
-    """Dá 3 cliques esquerdos rápidos e copia."""
+    """Realiza um triplo clique e copia o texto selecionado."""
     global executando_triplo_clique
 
     if executando_triplo_clique:
@@ -152,32 +149,16 @@ def triplo_clique():
 
     executando_triplo_clique = True
 
-    try:
-        time.sleep(0.10)
-
-        # Fecha o menu do botão direito, caso tenha aberto
-        keyboard.send("esc")
-        time.sleep(0.08)
-
-        # Triplo clique esquerdo
+    for _ in range(4):
         mouse.click(button="left")
-        time.sleep(0.07)
+        time.sleep(0.1)
 
-        mouse.click(button="left")
-        time.sleep(0.07)
+    copiar()
 
-        mouse.click(button="left")
-        time.sleep(0.15)
+    print("Triplo clique realizado e texto copiado!")
 
-        # Copia o texto selecionado
-        keyboard.send("ctrl+c")
-        time.sleep(0.10)
-
-        print("Triplo clique + copiar executado.")
-
-    finally:
-        executando_triplo_clique = False
-
+    time.sleep(0.5)
+    executando_triplo_clique = False
 
 def iniciar_triplo_clique_thread():
     """Inicia o triplo clique em uma thread separada."""
